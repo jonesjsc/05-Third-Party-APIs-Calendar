@@ -3,85 +3,61 @@ $('#currentDay').append(moment().format('MMMM Do YYYY'));
 const calStartHour = 9;
 const calEndHour = 17;
 var timeText;
-
 var myCalendar = $("#myCalendar");
 
-// var container = $("<div>");
-// container.addClass("myCalendar");
-// $("body").append(container);
+class UI {
+    static displayCal () {
 
-// var row = $("<div>");
-// row.addClass("row");
-// $("body").append(row);
+// iterate from 9 to 17 which is 9am to 5pm military time
 
-// var cellOne = $("<div>");
-// cellOne.addClass("col-2 border");
-// cellOne.text("9am");
-// $("body").append(cellOne);
+    for (var i = 9; i <= 17; i++) {  
+    
+        // there's probably a more eligant way to accomplish this, but
+        // we're just formatting the time here.  9 10 11 get AM appended
+        // 12 gets PM appended, and then 13 thru 17 gets PM appended also
+    
+        if (i < 12) {
+            timeText=i+"AM";
+        } 
+        if (i == 12) {
+            timeText="12PM";
+        } 
+        if (i > 12) { // i > 12
+            timeText=(i-12)+"PM";
+        }
 
+        // build the row and class it
+        var row = $("<div>");
+        row.addClass("row");
 
-// var cellTwo = $("<div>");
-// cellTwo.addClass("col-9 border");
-// cellTwo.text("imma edit you eventually");
-// $("body").append(cellTwo);
+        // build the individual cell divs
 
-// var cellThree = $("<div>");
-// cellThree.addClass("col-1 border");
-// cellThree.text("save");
-// $("body").append(cellThree);
+        var cellOne = $("<div>");
+        cellOne.addClass("col-1 border pt-2 pb-2");
+        cellOne.text(timeText);
 
-// row.append(cellOne, cellTwo, cellThree);
-// myCalendar.append(row);
-// $("body").append(html);
-// its just an input or a textarea
-// var timeRow = '<div class="container"><div class="row"><div class="col-2 border">XPM</div><div class="col-9 border">getting somewhere</div><div class="col-1 border">SV</div></div></div>';
-// $('#myCalendar').append(timeRow);
-// var timeRow = '<div class="container"><div class="row"><div class="col-2 border">XPM</div><div class="col-9 border">getting somewhere</div><div class="col-1 border">SV</div></div></div>';
-// $('#myCalendar').append(timeRow);
+        var cellTwo = $("<div>");
+        cellTwo.addClass("col-10 border pt-2 pb-2");
+        cellTwo.text("imma edit you eventually");
 
-// var cell1 = 
+        var cellThree = $("<div>");
+        cellThree.addClass("col-1 border pt-2 pb-2");
+        cellThree.text("save");
 
+        // put these cell divs into the row div
 
-
-
-
-for (var i = 9; i <= 17; i++) {  
-    if (i < 12) {
-        timeText=i+"AM";
-    } 
-    if (i == 12) {
-        timeText="12PM";
-    } 
-    if (i > 12) { // i > 12
-        timeText=(i-12)+"PM";
+        row.append(cellOne, cellTwo, cellThree);
+        
+        // append the whole row div into the myCalendar div
+        
+        myCalendar.append(row);
+        
+        // repeat until we're done!
+        }
     }
-var row = $("<div>");
-row.addClass("row");
-// $("body").append(row);
-
-var cellOne = $("<div>");
-cellOne.addClass("col-2 border");
-cellOne.text(timeText);
-// $("body").append(cellOne);
-
-
-var cellTwo = $("<div>");
-cellTwo.addClass("col-9 border");
-cellTwo.text("imma edit you eventually");
-// $("body").append(cellTwo);
-
-var cellThree = $("<div>");
-cellThree.addClass("col-1 border");
-cellThree.text("save");
-// $("body").append(cellThree);
-
-row.append(cellOne, cellTwo, cellThree);
-myCalendar.append(row);
-//     $('#calendar-area').append("<h1>"+timeText+"</h1>");
 }
 
-
-
+UI.displayCal ();
 
 // const $tableID = $('#table');
 //  const $BTN = $('#export-btn');
