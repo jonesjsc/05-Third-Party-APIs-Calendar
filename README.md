@@ -24,12 +24,12 @@ The primary objectives of this exercise were to demonstrate the following:
 
 # Screenshots
 ### Screen 1: **Initial Screen**
-![<img src=assets/images/images/screen01.png>](assets/images/screen01.png)
+![<img src=assets/images/screen01.png>](assets/images/screen01.png)
 
 This is a simple calendar appointment entry exercise.
 
 ### Screen 2: **Different Features**
-![<img src=assets/images/images/screen02.png>](assets/images/screen02.png)
+![<img src=assets/images/screen02.png>](assets/images/screen02.png)
 
 1. Using moment.js, wdisplay the current Date.
 2. When the calendar is rendered, we need to colarize it.  Compare the current time to the time being renders.  This is the block of the calendar for time that is before the current hour.
@@ -38,13 +38,13 @@ This is a simple calendar appointment entry exercise.
 5. This is the save button.
 
 ### Screen 3: **Data Entry**
-![<img src=assets/images/images/screen03.png>](assets/images/screen03.png)
+![<img src=assets/images/screen03.png>](assets/images/screen03.png)
 
 Here is a view of the screen during data entry.
 
 
 ### Screen 4: **Post Save**
-![<img src=assets/images/images/screen04.png>](assets/images/screen04.png)
+![<img src=assets/images/screen04.png>](assets/images/screen04.png)
 
 This is a view once data has been inputted and saved.
 
