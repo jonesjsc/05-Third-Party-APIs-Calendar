@@ -13,7 +13,6 @@ class calData {
     }
 }
 
-
 class Store {
     static getCalData() {
         var myCalData = [];
@@ -39,19 +38,19 @@ class Store {
                 {timeslot: "5pm",
                  appt: ""},
             ];
-            console.log("so im save a template to localStorage", myCalData);
-            localStorage.setItem('calData', JSON.stringify(myCalData));
+            console.log("so i save a template to localStorage", myCalData); // returns an array
+            localStorage.setItem('calData', JSON.stringify(myCalData)); // inspection in browser - yes
             console.log("template loaded");
-            console.log("fun fact here is what myCalData is now ",myCalData);
+            console.log("fun fact here is what myCalData is now ",myCalData); // returns an array
 
         } else {
           console.log("there's something in there so let load that ");
             myCalData = JSON.parse(localStorage.getItem('calData'));
-            console.log ("in the else, myCalData ",myCalData);
+            console.log ("in the else, myCalData ",myCalData); // returns an array
         }
-        console.log ("just finished the if then else - myCalData ",myCalData);
+        console.log ("just finished the if then else - myCalData ",myCalData); // returns UNDEFINED on first load, but if you REFRESH the browser it's populated
         myCalData = JSON.parse(localStorage.getItem('calData'));
-        console.log ("just loaded that fucker from localStorage ",myCalData);
+        console.log ("just loaded that fucker from localStorage ",myCalData); // returns an array
 
         return myCalData;
     }
@@ -61,6 +60,12 @@ class Store {
         // update the appointment with the text
         console.log("did someone say load some data into local storage?");
         localStorage.setItem('calData', JSON.stringify(calData));
+    }
+
+    static updateCalEntry(timeSlice, apptData) {
+        // when called we're expecting the timeSlice from the text area 9AM, 10AM etc
+        // and we need the data from the text area so we can find this in the 
+        // calData localStorage array and update that
     }
 
 }
@@ -139,5 +144,10 @@ class UI {
     });
     }
 }
+
+document.querySelector('#myCalendar'.addEventListener('click', (e) => {
+    // UI.saveCalEntry(e.target);
+    Store.updateCalEntry(e.target.parentElement.previousElementSibling.textContent);
+})
 
 UI.displayCal ();
