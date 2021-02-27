@@ -1,7 +1,3 @@
-// Simple Calendar app
-// moment.js
-// DOM manipulation / traversal
-
 $('#currentDay').append(moment().format('MMMM Do YYYY')); 
 
 var myCalendar = $("#myCalendar");
@@ -14,10 +10,11 @@ class calData {
 }
 
 class Store {
+    // note - there is something odd happening probably related to the fact that I am using classes
+    // extensive comments and console logs below
     static getCalData() {
         var myCalData = [];
         if(localStorage.getItem('calData') === null) {
-            console.log("local storage is not populated");
             let myCalData = [
                 {timeslot: "9am",
                  appt: ""},
@@ -38,19 +35,17 @@ class Store {
                 {timeslot: "5pm",
                  appt: ""},
             ];
-            console.log("so i save a template to localStorage", myCalData); // returns an array
             localStorage.setItem('calData', JSON.stringify(myCalData)); // inspection in browser - yes
-            console.log("template loaded");
             console.log("fun fact here is what myCalData is now ",myCalData); // returns an array
 
         } else {
-          console.log("there's something in there so let load that ");
+            console.log("Local Storage is defined, so lets load that");
             myCalData = JSON.parse(localStorage.getItem('calData'));
-            console.log ("in the else, myCalData ",myCalData); // returns an array
+            console.log ("myCalData ",myCalData); // returns an array
         }
         console.log ("just finished the if then else - myCalData ",myCalData); // returns UNDEFINED on first load, but if you REFRESH the browser it's populated
         myCalData = JSON.parse(localStorage.getItem('calData'));
-        console.log ("just loaded that fucker from localStorage ",myCalData); // returns an array
+        console.log ("just reload from localStorage ",myCalData); // returns an array
 
         return myCalData;
     }
@@ -58,11 +53,9 @@ class Store {
     static setCalData(calData) {
         // const calData = Store.getcalData();
         // update the appointment with the text
-        console.log("did someone say load some data into local storage?");
         localStorage.setItem('calData', JSON.stringify(calData));
     }
-
-    
+   
         // when called we're expecting the timeSlice from the text area 9AM, 10AM etc
         // and we need the data from the text area so we can find this in the 
         // calData localStorage array and update that
@@ -86,7 +79,7 @@ class UI {
 
         myCalData.forEach((calEvent, index) => {
 
-            var timeToCheck=index+9; // kinda being lazy - this array represetns time that starts at 9am
+            var timeToCheck=index+9; // kinda being lazy - this array represents time that starts at 9am
             var row = $("<div>");
             row.addClass("row");
 
@@ -117,23 +110,27 @@ class UI {
             
             var currentHour=moment().format("H");
             
+            // here is where we are colorizing the text input box based on time
+
             if (currentHour > timeToCheck) {
-                cellTwo.addClass("bg-secondary");
-                cellTwoInput.addClass("bg-secondary text-white");
+                cellTwo.addClass("past");
+                cellTwoInput.addClass("past");
             }
             if (currentHour == timeToCheck) {
-                cellTwo.addClass("bg-danger");
-                cellTwoInput.addClass("bg-danger text-white");
+                cellTwo.addClass("present");
+                cellTwoInput.addClass("present");
             }
             if (currentHour < timeToCheck) {
-                cellTwo.addClass("bg-success");
-                cellTwoInput.addClass("bg-success text-white");
+                cellTwo.addClass("future");
+                cellTwoInput.addClass("future");
             }
             cellTwo.append(cellTwoInput);
         
+            // cellThree is the save button cell.
+
             var cellThree = $("<div>");
             cellThree.addClass("col-1 border pt-2 pb-2 btn btn-sm saveBtn");
-            cellThree.text("save"); // use font awesome here
+            cellThree.text("save"); // might could use use a font awesome icon here
 
             // put these cell divs into the row div
 
@@ -149,19 +146,25 @@ class UI {
     static locateWhatChanged(event) {
         if(event.target.classList.contains('saveBtn')) {  // lets be sure the click is on the save area
         
+            // where's here because someone clicked on the SAVE button.  Lets pluck out 
+            // the text of what's in the input area, and also lets get the time from the DOM too.
             // DOM traversial is so much fun.  
             // I heart DOM traversial
-            
+            //
+            // To pluck the text
+            // we need to get the form.value from the previous siblings children.
+            // here's a fun fact: i never weas good at family trees so this part is super fun for me.
+            //
             var apptText = (event.target.previousSibling.childNodes[0].value); 
             
+            // heck while we're here lets just grab the text out of the DOM we put there for the time.
+        
             var apptTime = (event.target.previousSibling.previousSibling.textContent);
-            console.log ("i need to update "+apptTime+" and "+apptText);
             Store.updateWhatChanged(apptTime,apptText);
         
         }
     }
 
-    // console.log ("i need to update "+apptTime+" and "+apptText);
 }
 // end UI Class defination
 
