@@ -130,7 +130,8 @@ class UI {
         cellTwo.append(cellTwoInput);
       
         var cellThree = $("<div>");
-        cellThree.addClass("col-1 border pt-2 pb-2");
+        cellThree.addClass("col-1 border pt-2 pb-2 saveBtn");
+        // callThree.setAttribute("id", "saveBtn");
         cellThree.text("save");
 
         // put these cell divs into the row div
@@ -145,9 +146,19 @@ class UI {
     }
 }
 
-// document.querySelector('#myCalendar'.addEventListener('click', (e) => {
-//     // UI.saveCalEntry(e.target);
-//     Store.updateCalEntry(e.target.parentElement.previousElementSibling.textContent);
-// });
+document.querySelector('#myCalendar').addEventListener('click', (event) => {
+    
+    if(event.target.classList.contains('saveBtn')) {  // lets be sure the click is on the save area
+        
+        // DOM traversial is so much fun.  
+        // I heart DOM traversial
+        
+        var apptText = (event.target.previousSibling.childNodes[0].value); 
+        
+        var apptTime = (event.target.previousSibling.previousSibling.textContent);
+        console.log ("i need to update "+apptTime+" and "+apptText);
+    }
+    // Store.updateCalEntry(e.target.parentElement.previousElementSibling.textContent);
+});
 
 UI.displayCal ();
