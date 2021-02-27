@@ -145,9 +145,9 @@ class UI {
     }
 }
 
-document.querySelector('#myCalendar'.addEventListener('click', (e) => {
-    // UI.saveCalEntry(e.target);
-    Store.updateCalEntry(e.target.parentElement.previousElementSibling.textContent);
-})
+// document.querySelector('#myCalendar'.addEventListener('click', (e) => {
+//     // UI.saveCalEntry(e.target);
+//     Store.updateCalEntry(e.target.parentElement.previousElementSibling.textContent);
+// });
 
 UI.displayCal ();
